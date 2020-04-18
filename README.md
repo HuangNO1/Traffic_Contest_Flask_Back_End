@@ -42,35 +42,41 @@ http://127.0.0.1:5000/get_way_1_route
 	"code": 200,
 	"name": "way 1 route",
 	"msg": "get data success",
-	"data": {
-		"way_1_route_final_min": {
-			"origin":{
-				"name": ori,
-				"location": oriloc
+	"data": {#返回值会是一个dict类型的变量
+		"way_1_route_final_min": {#算法一最优计算结果
+			"origin": {#起点信息
+				"name": ori,#起点名字，与输入值相同
+				"location": oriloc#起点坐标
 			},
-			"destination":{
-				"name": des,
-				"location": desloc
+			"destination":{#终点信息
+				"name": des,#终点名字
+				"location": desloc#终点坐标
 			},
 			"option": 0,
 			"paths": {
 				"path": 0,
-				"distance": min_distance,
-				"duration": minduration,
-				"steps": minresult
+				"distance": min_distance,#路径的距离
+				"duration": minduration,#路径的耗时
+				"steps": {#每一步驾驶动作的内容
+					"action":#简要的驾驶动作
+					"distance":#驾驶动作的距离
+					"duration":#驾驶动作的耗时
+					"instruction":#具体的驾驶动作
+					"polyline":#本驾驶动作经过的路径（以多个坐标的形式给出）
+				}
 			}
 		},
-		"way_1_route_final_second": {
+		"way_1_route_final_second": {#算法一次优计算结果（输出含义不变）
 			"origin": {
 				"name": ori,
 				"location": oriloc
 			},
-			"destination":{
+			"destination": {
 				"name": des,
 				"location": desloc
 			},
 			"option": 1,
-			"paths":{
+			"paths": {
 				"path": 1,
 				"distance": second_distance,
 				"duration": secondduration,
@@ -137,27 +143,33 @@ http://127.0.0.1:5000/get_way_2_route
 	"name": "way 2 route",
 	"msg": "get data success",
 	"data": {
-		"way_2_route_final_min": {
-			"origin": {
-				"name": ori,
-				"location": oriloc
+		"way_2_route_final_min": {#算法二最优计算结果
+			"origin":{#起点信息
+				"name": ori,#起点名字，与输入值相同
+				"location": oriloc#起点坐标
 			},
-			"destination": {
-				"name": des,
-				"location": desloc
+			"destination":{#终点信息
+				"name": des,#终点名字
+				"location": desloc#终点坐标
 			},
 			"option": 0,
-			"hosinfo": {
-				"hosname": naviresult[mindurationpos][1],
-				"hosloc": naviresult[mindurationpos][2]
+			"hosinfo": {#无人机飞行目标医院的信息
+				"hosname": naviresult[mindurationpos][1],#医院名称
+				"hosloc": naviresult[mindurationpos][2]#医院坐标
 			},
 			"paths": {"path":0,
 				"distance": min_distance,
 				"duration": minduration,
-				"steps": minresult
+				"steps":｛#每一步驾驶动作的内容
+					"action":#简要的驾驶动作
+					"distance":#驾驶动作的距离
+					"duration":#驾驶动作的耗时
+					"instruction":#具体的驾驶动作
+					"polyline":#本驾驶动作经过的路径（以多个坐标的形式给出）
+				}
 			}
 		},
-		"way_2_route_final_second": {
+		"way_2_route_final_second": {#算法二次优计算结果（输出含义不变）
 			"origin": {
 				"name": ori,
 				"location": oriloc
@@ -240,21 +252,25 @@ http://127.0.0.1:5000/get_way_3_route
 	"name": "way 3 route",
 	"msg": "get data success",
 	"data": {
-		"way_3_route_final": {
-			"origin": {
-				"name": ori,
-				"location": oriloc
+		way_3_route_final: {#算法三最优计算结果
+			"origin":{#起点信息
+				"name": ori,#起点名字，与输入值相同
+				"location": oriloc#起点坐标
 			},
-			"destination":{
-				"name": des,
-				"location": desloc
+			"destination":{#终点信息
+				"name": des,#终点名字
+				"location": desloc#终点坐标
 			},
 			"option": 0,
 			"paths": {
 				"path": 0,
 				"distance": min_distance,
 				"duration": minduration,
-				"steps": steps
+				"steps": {
+					list0:#医院名称
+					list1:#医院坐标
+					list2:#从上一点到本医院的距离
+				}
 			}
 		}   
 	}
@@ -483,7 +499,7 @@ http://127.0.0.1:5000/get_fly_init_position
 }
 ```
 
-### 仿真無人機傳輸當前實時位置
+### 彷真無人機傳輸當前實時位置
 
 #### Resquest
 
